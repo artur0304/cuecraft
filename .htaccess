@@ -1,0 +1,15 @@
+# Apache направляет адреса /admin и /api/... в единый PHP-маршрутизатор.
+# Файлы CSS, JavaScript и изображения остаются доступными напрямую.
+Options -Indexes
+RewriteEngine On
+RewriteRule ^config(?:\.[^/]+)?\.php$ - [F,L,NC]
+
+# Закрываем базу, сессии и служебные файлы до правила раздачи файлов.
+RewriteRule ^(?:data|tests|\.git|\.test-deps)(?:/|$) - [F,L,NC]
+RewriteRule ^(?:payments\.php|advisor\.php|.*\.py|.*\.md|.*\.db|.*\.sqlite|\.env.*)$ - [F,L,NC]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^ index.php [QSA,L]

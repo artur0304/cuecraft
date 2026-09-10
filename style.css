@@ -1,0 +1,963 @@
+/* Заголовки — выразительные, основной текст — чистый и читаемый. */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap");
+
+/* Переменные с основными цветами сайта */
+:root {
+    --background: #10100f;
+    --card: #1b1b18;
+    --text: #f5f1e8;
+    --muted: #aaa69a;
+    --gold: #c99d50;
+    --mint: #1b1b18;
+}
+
+/* Убираем стандартные отступы браузера */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Общий вид страницы */
+body {
+    background:
+        radial-gradient(ellipse at 12% 10%, rgba(130, 67, 34, 0.3), transparent 26%),
+        radial-gradient(ellipse at 88% 42%, rgba(100, 48, 24, 0.26), transparent 24%),
+        radial-gradient(ellipse at 32% 86%, rgba(82, 39, 20, 0.22), transparent 22%),
+        var(--background);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.logo {
+    font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+/* Общая ширина и отступы для основных блоков */
+.header,
+.hero,
+.catalog,
+.about,
+.footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+/* Шапка */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 80px;
+    border-bottom: 1px solid #30302c;
+}
+
+/* Логотип */
+.logo {
+    color: var(--text);
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+/* Ссылки меню */
+.nav {
+    display: flex;
+    gap: 24px;
+}
+
+.nav a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.nav a:hover {
+    color: var(--gold);
+}
+
+/* Первый экран */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: 620px;
+    gap: 40px;
+}
+
+/* Маленькая золотая подпись над заголовками */
+.eyebrow {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+/* Главный заголовок */
+.hero h1 {
+    font-size: clamp(44px, 6vw, 78px);
+    line-height: 1;
+    margin-bottom: 24px;
+}
+
+/* Описание на первом экране */
+.hero-description {
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: 32px;
+}
+
+/* Кнопка */
+.button,
+.order-button {
+    display: inline-block;
+    background: var(--gold);
+    border: none;
+    color: #16130d;
+    cursor: pointer;
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    padding: 15px 22px;
+    text-decoration: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.button:hover,
+.order-button:hover {
+    background: #e0b464;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.32);
+    transform: translateY(-4px) scale(1.02);
+}
+
+.button:active,
+.order-button:active {
+    transform: translateY(0) scale(0.99);
+}
+
+/* Правая часть первого экрана */
+.cue-visual {
+    background:
+        radial-gradient(circle at 18% 20%, rgba(140, 72, 35, 0.72), transparent 28%),
+        radial-gradient(circle at 80% 76%, rgba(94, 43, 21, 0.64), transparent 34%),
+        #191916;
+    height: 390px;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Сам кий */
+.cue {
+    background: linear-gradient(to right, #40230e, #e0a95d, #5b3011);
+    height: 10px;
+    position: absolute;
+    top: 48%;
+    transform: rotate(-28deg);
+    width: 130%;
+}
+
+/* Бильярдные шары */
+.ball {
+    align-items: center;
+    background: #e5e2d9;
+    border-radius: 50%;
+    color: #111;
+    display: flex;
+    font-weight: bold;
+    height: 70px;
+    justify-content: center;
+    position: absolute;
+    width: 70px;
+}
+
+.ball-1 {
+    bottom: 48px;
+    right: 52px;
+}
+
+.ball-2 {
+    background: #c99d50;
+    bottom: 105px;
+    right: 120px;
+}
+
+/* Секция каталога */
+.catalog {
+    padding-bottom: 110px;
+}
+
+.section-heading h2,
+.about h2 {
+    font-size: 38px;
+    margin-bottom: 40px;
+}
+
+/* Сетка с карточками */
+.product-grid {
+    display: grid;
+    gap: 22px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Одна карточка товара */
+.product-card {
+    background: var(--card);
+    border: 1px solid rgba(215, 190, 145, 0.08);
+    border-radius: 24px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+    padding: 18px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.product-card:hover {
+    border-color: rgba(201, 157, 80, 0.56);
+    box-shadow: 0 24px 42px rgba(0, 0, 0, 0.34);
+    transform: translateY(-9px) rotate(-0.25deg);
+}
+
+/* Фото товара из папки images */
+.product-image {
+    border-radius: 14px;
+    display: block;
+    height: 210px;
+    margin-bottom: 20px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Описание магазина под заголовком каталога */
+.catalog-intro {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 650px;
+}
+
+/* Поле поиска помогает найти товар, не перебирая карточки вручную. */
+.catalog-search {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 18px;
+    max-width: 430px;
+}
+
+.catalog-search span {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.catalog-search input {
+    background: #171715;
+    border: 1px solid #4a4943;
+    color: var(--text);
+    border-radius: 14px;
+    font: inherit;
+    padding: 13px 15px;
+}
+
+.catalog-search input:focus {
+    border-color: var(--gold);
+    outline: 2px solid rgba(201, 157, 80, 0.25);
+}
+
+.catalog-search input::placeholder {
+    color: #817d73;
+}
+
+/* Вторичная кнопка в карточке: открывает детали товара */
+.details-button {
+    background: transparent;
+    border: 1px solid #5d5b52;
+    color: var(--text);
+    cursor: pointer;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    padding: 12px 18px;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    width: 100%;
+}
+
+.details-button:hover {
+    border-color: var(--gold);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: var(--gold);
+    transform: translateY(-3px);
+}
+
+.wood-1 {
+    background: linear-gradient(120deg, #26150b, #bd7d3a, #40210e);
+}
+
+.wood-2 {
+    background: linear-gradient(120deg, #160e09, #8c4e24, #2d160a);
+}
+
+.wood-3 {
+    background: linear-gradient(120deg, #101010, #555, #151515);
+}
+
+.product-type {
+    color: var(--gold);
+    font-size: 13px;
+    margin-bottom: 9px;
+}
+
+.product-card h3 {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.price {
+    color: var(--muted);
+    font-family: "Space Mono", "Manrope", monospace;
+    margin-bottom: 18px;
+}
+
+/* Небольшая метка наличия загружается из таблицы products в SQLite. */
+.availability {
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    display: inline-block;
+    font-size: 13px;
+    margin: -8px 0 18px;
+    padding: 5px 8px;
+}
+
+.availability-loading,
+.availability-preorder {
+    color: #d5ab60;
+}
+
+.availability-in-stock {
+    color: #79bd8f;
+}
+
+.availability-out-of-stock {
+    color: #d8857d;
+}
+
+#order-form input[type="number"] {
+    max-width: 150px;
+}
+
+/* Пояснение под полем количества, чтобы не путать его с остатком. */
+.field-hint {
+    color: #645b4d;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: -4px;
+}
+
+/* Короткий список характеристик внутри карточки */
+.product-specs {
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin-bottom: 18px;
+}
+
+/* Одна характеристика: материал, длина или вес */
+.product-specs li {
+    border: 1px solid #42413b;
+    border-radius: 999px;
+    font-size: 13px;
+    padding: 6px 8px;
+}
+
+/* Подсказка, для какого стиля игры создан товар */
+.player-fit {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.player-fit strong {
+    color: var(--text);
+}
+
+/* Блок «О нас» */
+.about {
+    border-top: 1px solid #30302c;
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 110px;
+    padding-top: 90px;
+}
+
+.advantages {
+    display: grid;
+    gap: 18px;
+}
+
+.advantages p {
+    border-bottom: 1px solid #30302c;
+    color: var(--muted);
+    padding-bottom: 16px;
+}
+
+.advantages strong {
+    color: var(--gold);
+    margin-right: 12px;
+}
+
+/* Тёплый текст в левом столбце блока «Наш подход» */
+.about-description {
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 440px;
+}
+
+/* Подвал */
+.footer {
+    border-top: 1px solid #30302c;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.footer a {
+    color: var(--gold);
+}
+
+/* Правила для экранов уже 700 пикселей, например телефона */
+@media (max-width: 700px) {
+    .header {
+        min-height: 70px;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .hero,
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-bottom: 70px;
+        padding-top: 70px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 14px;
+    }
+}
+
+/* Расположение кнопок фильтра */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+/* Обычная кнопка фильтра */
+.filter-button {
+    background: transparent;
+    border: 1px solid #4a4943;
+    color: var(--text);
+    cursor: pointer;
+    border-radius: 999px;
+    padding: 10px 14px;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+/* Активная кнопка */
+.filter-button.active,
+.filter-button:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #16130d;
+    transform: translateY(-3px);
+}
+
+/* Карточка, скрытая фильтром */
+.product-card.is-hidden {
+    display: none;
+}
+
+/* Сообщение появляется, когда комбинация поиска и фильтра ничего не нашла. */
+.catalog-empty {
+    border: 1px solid #4a4943;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 22px;
+    padding: 22px;
+}
+
+/* Тёмный фон поверх страницы */
+.modal {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.72);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    padding: 20px;
+    position: fixed;
+    z-index: 10;
+}
+
+/* Полностью скрывает окно */
+.modal.is-hidden {
+    display: none;
+}
+
+/* Белый блок формы */
+.modal-content {
+    background: #fffaf2;
+    /* У светлого окна свой тёмный текст: иначе он сливается с фоном. */
+    color: #29241d;
+    max-width: 460px;
+    border-radius: 26px;
+    padding: 38px;
+    position: relative;
+    width: 100%;
+}
+
+.modal-content h2 {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.selected-product {
+    color: #645b4d;
+    margin-bottom: 24px;
+}
+
+/* Окно заказа ограничено по высоте, поэтому его не нужно прокручивать целиком. */
+#order-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 40px);
+    max-height: calc(100dvh - 40px);
+    overflow: hidden;
+}
+
+/* Форма состоит из прокручиваемых полей и постоянно видимой зоны с кнопкой. */
+#order-form {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 0;
+    min-height: 0;
+}
+
+/* Здесь прокручиваются только поля и варианты оплаты, если места мало. */
+.order-form-fields {
+    display: grid;
+    flex: 1 1 auto;
+    gap: 10px;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 4px 12px 0;
+}
+
+/* Нижняя панель остаётся на месте и не даёт кнопке уйти за край экрана. */
+.order-form-actions {
+    background: #fffaf2;
+    border-top: 1px solid #ded6c8;
+    box-shadow: 0 -8px 18px rgba(41, 36, 29, 0.08);
+    display: grid;
+    flex: 0 0 auto;
+    gap: 10px;
+    padding-top: 12px;
+}
+
+.order-form-actions .button {
+    min-height: 52px;
+    width: 100%;
+}
+
+/* Чёткие заголовки над каждым полем заявки. */
+#order-form label {
+    color: #40382d;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#order-form input:not([type="radio"]) {
+    background: #ffffff;
+    border: 1px solid #aaa69a;
+    color: #29241d;
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding: 13px;
+}
+
+/* Варианты оплаты — это одна понятная группа, а не обычные поля ввода. */
+.payment-methods {
+    border: 0;
+    display: grid;
+    gap: 10px;
+    margin: 4px 0 12px;
+    padding: 0;
+}
+
+.payment-methods legend {
+    color: #40382d;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+    padding: 0;
+}
+
+#order-form .payment-option {
+    align-items: flex-start;
+    background: #ffffff;
+    border: 1px solid #c9c1b5;
+    border-radius: 14px;
+    color: #29241d;
+    cursor: pointer;
+    display: flex;
+    gap: 11px;
+    margin: 0;
+    padding: 12px;
+}
+
+#order-form .payment-option input[type="radio"] {
+    accent-color: #b8822f;
+    flex: 0 0 auto;
+    height: 18px;
+    margin: 3px 0 0;
+    width: 18px;
+}
+
+.payment-option-text {
+    display: grid;
+    gap: 3px;
+}
+
+.payment-option-title {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.payment-option-description {
+    color: #645b4d;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+#order-form .payment-option:has(input:checked) {
+    border-color: #b8822f;
+    box-shadow: 0 0 0 2px rgba(184, 130, 47, 0.14);
+}
+
+#order-form .payment-option-disabled {
+    background: #f0ece4;
+    cursor: not-allowed;
+    opacity: 0.68;
+}
+
+.payment-option-marker {
+    color: #81796c;
+    font-size: 23px;
+    line-height: 18px;
+}
+
+/* Кнопка × */
+.close-button {
+    background: transparent;
+    border: none;
+    color: #29241d;
+    cursor: pointer;
+    border-radius: 50%;
+    display: grid;
+    font-size: 30px;
+    height: 44px;
+    place-items: center;
+    position: absolute;
+    right: 16px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    top: 10px;
+    width: 44px;
+    z-index: 1;
+}
+
+.close-button:hover {
+    background: #ece4d8;
+    transform: rotate(90deg);
+}
+
+/* Пользователи, отключившие анимации в системе, увидят спокойную версию сайта. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Сообщение после отправки формы */
+.form-status {
+    font-size: 14px;
+    min-height: 20px;
+}
+
+.form-status.success {
+    color: #2b7a4b;
+}
+
+.form-status.error {
+    color: #b53a31;
+}
+
+/* Большое фото внутри окна «Подробнее» */
+.modal-product-image {
+    height: 260px;
+    margin-bottom: 22px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.modal-product-description {
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Версия для телефона: больше воздуха, крупные элементы и доступное меню. */
+@media (max-width: 700px) {
+    /* На телефонах фиксированный фон иногда дёргается во время прокрутки. */
+    body {
+        background-attachment: scroll;
+    }
+
+    .header,
+    .hero,
+    .catalog,
+    .about,
+    .footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* Меню переносится на вторую строку, а не исчезает на маленьком экране. */
+    .header {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 14px;
+        padding-bottom: 16px;
+        padding-top: 16px;
+    }
+
+    .nav {
+        display: flex;
+        gap: 12px;
+        justify-content: space-between;
+        order: 3;
+        width: 100%;
+    }
+
+    .nav a {
+        align-items: center;
+        display: inline-flex;
+        font-size: 14px;
+        min-height: 44px;
+        padding: 8px 0;
+    }
+
+    .hero {
+        gap: 32px;
+        min-height: auto;
+        padding-bottom: 64px;
+        padding-top: 48px;
+    }
+
+    .hero h1 {
+        font-size: clamp(42px, 14vw, 62px);
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .cue-visual {
+        border-radius: 22px;
+        height: 260px;
+    }
+
+    .ball {
+        height: 54px;
+        width: 54px;
+    }
+
+    .ball-1 {
+        bottom: 30px;
+        right: 28px;
+    }
+
+    .ball-2 {
+        bottom: 75px;
+        right: 82px;
+    }
+
+    .catalog {
+        padding-bottom: 72px;
+    }
+
+    .section-heading h2,
+    .about h2 {
+        font-size: 34px;
+        margin-bottom: 24px;
+    }
+
+    .catalog-search {
+        max-width: none;
+    }
+
+    /* Категории прокручиваются пальцем в одну строку и не сжимают текст. */
+    .filters {
+        flex-wrap: nowrap;
+        margin-left: -20px;
+        margin-right: -20px;
+        overflow-x: auto;
+        padding: 2px 20px 12px;
+        scrollbar-width: thin;
+    }
+
+    .filter-button {
+        flex: 0 0 auto;
+        min-height: 44px;
+    }
+
+    .product-grid {
+        gap: 18px;
+    }
+
+    .product-card {
+        border-radius: 20px;
+        padding: 14px;
+    }
+
+    /* На сенсорном экране hover нет, поэтому карточка не «прыгает» при касании. */
+    .product-card:hover {
+        transform: none;
+    }
+
+    .product-image {
+        border-radius: 12px;
+        height: 230px;
+        margin-bottom: 16px;
+    }
+
+    /* Вертикальное фото держателя остаётся сфокусированным на самом товаре. */
+    [data-product-slug="magnetic-chalk-holder"] .product-image {
+        object-position: center 35%;
+    }
+
+    .product-card h3 {
+        font-size: 28px;
+    }
+
+    .product-card .order-button {
+        text-align: center;
+        width: 100%;
+    }
+
+    .details-button {
+        min-height: 44px;
+    }
+
+    .about {
+        gap: 28px;
+        padding-bottom: 70px;
+        padding-top: 64px;
+    }
+
+    .footer {
+        align-items: flex-start;
+        padding-bottom: 26px;
+        padding-top: 26px;
+    }
+
+    /* Окна открываются снизу, как привычные панели мобильных приложений. */
+    .modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .modal-content {
+        border-radius: 24px 24px 0 0;
+        /* Сначала обычный vh для старых браузеров, затем динамический vh для телефона. */
+        max-height: 92vh;
+        max-height: 92dvh;
+        overflow-y: auto;
+        padding: 30px 22px calc(28px + env(safe-area-inset-bottom));
+    }
+
+    /* На телефоне нижние отступы принадлежат закреплённой кнопке, а не всей форме. */
+    #order-modal .modal-content {
+        max-height: 92vh;
+        max-height: 92dvh;
+        padding: 30px 22px 0;
+    }
+
+    .order-form-actions {
+        padding-bottom: calc(18px + env(safe-area-inset-bottom));
+    }
+
+    .modal-content h2 {
+        font-size: 30px;
+        padding-right: 32px;
+    }
+
+    #order-form input:not([type="radio"]) {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    #order-form input[type="number"] {
+        max-width: 160px;
+    }
+
+    .modal-product-image {
+        border-radius: 12px;
+        height: 190px;
+        margin-bottom: 18px;
+    }
+
+    /* Длинный адрес почты не выйдет за край при увеличенном размере текста. */
+    .footer a {
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Убираем эффекты мыши там, где пользователь управляет только пальцем. */
+@media (hover: none) {
+    .button:hover,
+    .order-button:hover,
+    .details-button:hover,
+    .filter-button:hover {
+        transform: none;
+    }
+}

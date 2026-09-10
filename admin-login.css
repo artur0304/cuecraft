@@ -1,0 +1,139 @@
+/* Самостоятельный стиль страницы входа в тёмно-золотой гамме сайта. */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+    --background: #10100f;
+    --panel: #1b1b18;
+    --text: #f5f1e8;
+    --muted: #aaa69a;
+    --gold: #c99d50;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    align-items: center;
+    background:
+        radial-gradient(ellipse at 20% 18%, rgba(130, 67, 34, 0.32), transparent 32%),
+        radial-gradient(ellipse at 82% 74%, rgba(100, 48, 24, 0.27), transparent 30%),
+        var(--background);
+    color: var(--text);
+    display: flex;
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.login-card {
+    background: var(--panel);
+    border-radius: 24px;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.35);
+    max-width: 440px;
+    padding: 42px;
+    width: 100%;
+}
+
+.logo {
+    color: var(--text);
+    display: inline-block;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 48px;
+    text-decoration: none;
+}
+
+.logo span,
+.eyebrow {
+    color: var(--gold);
+}
+
+.eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+
+h1 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.intro,
+.back-link {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+#login-form {
+    display: grid;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+label {
+    color: var(--text);
+    font-weight: 700;
+}
+
+input {
+    background: #ffffff;
+    border: 1px solid #aaa69a;
+    color: #29241d;
+    border-radius: 12px;
+    font-size: 18px;
+    padding: 13px;
+}
+
+input:focus {
+    border-color: var(--gold);
+    outline: 2px solid rgba(201, 157, 80, 0.35);
+}
+
+button {
+    background: var(--gold);
+    border: 0;
+    color: #17130c;
+    border-radius: 14px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 8px;
+    padding: 14px;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+button:hover {
+    background: #e0b464;
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px) scale(1.01);
+}
+
+button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.form-status {
+    color: var(--muted);
+    font-size: 14px;
+    min-height: 20px;
+}
+
+.form-status.error {
+    color: #ff9c92;
+}
+
+.back-link:hover {
+    color: var(--gold);
+}
