@@ -48,6 +48,13 @@ function createCell(text) {
     return cell;
 }
 
+// Комментарий может быть длинным, поэтому ему назначаем отдельный класс для переноса строк.
+function createCommentCell(comment) {
+    const cell = createCell(comment && comment.trim() ? comment : "—");
+    cell.classList.add("comment-cell");
+    return cell;
+}
+
 // Создаёт выпадающий список, через который меняется этап заявки.
 function createStatusSelector(order) {
     const cell = document.createElement("td");
@@ -324,7 +331,7 @@ async function loadOrders() {
         if (orders.length === 0) {
             const row = document.createElement("tr");
             const cell = createCell("Заявок пока нет. Отправь тестовую заявку с сайта.");
-            cell.colSpan = 8;
+            cell.colSpan = 9;
             cell.classList.add("empty-cell");
             row.append(cell);
             ordersBody.append(row);
@@ -340,6 +347,7 @@ async function loadOrders() {
                 createCell(order.product),
                 createCell(order.customer_name),
                 createCell(order.customer_phone),
+                createCommentCell(order.comment),
                 createCell(`${order.quantity} шт.`),
                 createCell(order.payment_method === 'online_demo'
                     ? `Демо: ${{pending: 'ожидает оплаты', demo_paid: 'Оплачено — демо', failed: 'отказ', cancelled: 'отмена'}[order.payment_status] || order.payment_status} · ${(order.amount_minor / 100).toLocaleString('uk-UA')} ₴`

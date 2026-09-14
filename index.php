@@ -121,7 +121,8 @@ function initializeDatabase(): void
             customer_name TEXT NOT NULL,
             customer_phone TEXT NOT NULL,
             created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            payment_method TEXT NOT NULL DEFAULT 'not_selected'
+            payment_method TEXT NOT NULL DEFAULT 'not_selected',
+            comment TEXT NOT NULL DEFAULT ''
         )"
     );
 
@@ -146,6 +147,11 @@ function initializeDatabase(): void
         $connection->exec(
             "ALTER TABLE orders ADD COLUMN payment_method TEXT NOT NULL DEFAULT 'not_selected'"
         );
+    }
+
+    // Комментарий необязателен, поэтому старые заявки получают пустое значение.
+    if (!in_array('comment', $orderColumns, true)) {
+        $connection->exec("ALTER TABLE orders ADD COLUMN comment TEXT NOT NULL DEFAULT ''");
     }
 
     // Таблица хранит только число ошибочных попыток и время окончания блокировки.
@@ -246,6 +252,8 @@ function validateOrder(?array $data): array
     $product = textValue($data['product'] ?? null);
     $customerName = textValue($data['name'] ?? null);
     $customerPhone = textValue($data['phone'] ?? null);
+    // Покупатель может уточнить удобный способ связи или оставить другое пожелание.
+    $comment = textValue($data['comment'] ?? null);
     $rawQuantity = $data['quantity'] ?? 1;
     // Старые открытые вкладки ещё могут отправить форму без поля оплаты.
     // Такая заявка не теряется, а честно помечается в админке как «Не указан».
@@ -261,6 +269,10 @@ function validateOrder(?array $data): array
 
     if (!preg_match('/^[0-9+() -]{7,30}$/', $customerPhone)) {
         return [null, 'Введите корректный номер телефона.'];
+    }
+
+    if (mb_strlen($comment) > 1000) {
+        return [null, 'Комментарий должен быть не длиннее 1000 символов.'];
     }
 
     // Не принимаем дроби, отрицательные числа и true/false как количество.
@@ -286,6 +298,7 @@ function validateOrder(?array $data): array
         'product' => $product,
         'customer_name' => $customerName,
         'customer_phone' => $customerPhone,
+        'comment' => $comment,
         'quantity' => $quantity,
         'payment_method' => $paymentMethod,
     ], null];
@@ -300,11 +313,14 @@ function hasAdminAccess(): bool
 /** Возвращает хеш пароля: на хостинге будет использоваться переменная окружения. */
 function adminPasswordHash(): string
 {
+    // Хостинг может не передать локальную настройку через putenv.
+    // Поэтому после проверки переменной окружения читаем хеш из config.local.php.
+    global $localConfig;
     $environmentHash = getenv('CUECRAFT_ADMIN_PASSWORD_HASH');
 
     return is_string($environmentHash) && $environmentHash !== ''
         ? $environmentHash
-        : DEFAULT_ADMIN_PASSWORD_HASH;
+        : (string) ($localConfig['CUECRAFT_ADMIN_PASSWORD_HASH'] ?? DEFAULT_ADMIN_PASSWORD_HASH);
 }
 
 /** Сравнивает хеши через hash_equals, чтобы сравнение не зависело от длины совпадения. */
@@ -467,12 +483,13 @@ if ($method === 'POST' && $path === '/api/orders') {
         jsonResponse(['ok' => false, 'error' => 'Демонстрационная оплата отключена.'], 409);
     }
     $addOrder = $connection->prepare(
-        'INSERT INTO orders (product, customer_name, customer_phone, quantity, payment_method, product_slug, unit_amount_minor, amount_minor, payment_status, payment_provider) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        'INSERT INTO orders (product, customer_name, customer_phone, comment, quantity, payment_method, product_slug, unit_amount_minor, amount_minor, payment_status, payment_provider) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     );
     $addOrder->execute([
         $order['product'],
         $order['customer_name'],
         $order['customer_phone'],
+        $order['comment'],
         $order['quantity'],
         $order['payment_method'],
         $product['slug'], (int) $product['price_uah'] * 100, $amountMinor,
@@ -502,7 +519,7 @@ if ($method === 'GET' && $path === '/api/products') {
 if ($method === 'GET' && $path === '/api/orders') {
     requireAdmin();
     $orders = database()->query(
-        'SELECT id, product, customer_name, customer_phone, quantity, payment_method, payment_status, payment_provider, amount_minor, status, created_at
+        'SELECT id, product, customer_name, customer_phone, comment, quantity, payment_method, payment_status, payment_provider, amount_minor, status, created_at
          FROM orders ORDER BY id DESC'
     )->fetchAll();
 

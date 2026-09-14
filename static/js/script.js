@@ -63,6 +63,8 @@ orderForm.addEventListener("submit", async function (event) {
         product: currentOrderProduct,
         name: document.querySelector("#customer-name").value,
         phone: document.querySelector("#customer-phone").value,
+        // Комментарий необязательный, но сохраняется вместе с заявкой.
+        comment: document.querySelector("#order-comment").value,
         quantity: document.querySelector("#customer-quantity").value,
         // Берём отмеченную радиокнопку: она определяет вариант оплаты в заявке.
         payment_method: selectedPayment ? selectedPayment.value : "not_selected",

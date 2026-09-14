@@ -202,7 +202,7 @@ h2 {
 
 table {
     border-collapse: collapse;
-    min-width: 960px;
+    min-width: 1120px;
     text-align: left;
     width: 100%;
 }
@@ -222,6 +222,15 @@ th {
 
 td {
     color: var(--text);
+}
+
+/* Длинный комментарий переносится внутри своей ячейки, не растягивая таблицу. */
+.comment-cell {
+    line-height: 1.45;
+    max-width: 260px;
+    min-width: 180px;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .empty-cell {

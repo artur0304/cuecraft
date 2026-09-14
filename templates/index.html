@@ -16,7 +16,7 @@
     <!-- Подключаем файл со стилями -->
     <!-- CSS лежит в отдельной папке static/css. -->
     <!-- Версия в адресе обновляет стили у посетителя, даже если браузер сохранил старую копию. -->
-    <link rel="stylesheet" href="static/css/style.css?v=order-button-20260910-3">
+    <link rel="stylesheet" href="static/css/style.css?v=comment-modal-20260911-2">
 </head>
 
 <body>
@@ -263,6 +263,10 @@
                 <label for="customer-phone">Телефон</label>
                 <input id="customer-phone" type="tel" required>
 
+                <label for="order-comment">Комментарий к заказу</label>
+                <!-- Комментарий помогает выбрать удобный способ связи и передаётся в админку. -->
+                <textarea id="order-comment" maxlength="1000" rows="3" placeholder="Например: не звоните, напишите в Viber или Telegram"></textarea>
+
                 <label for="customer-quantity">Сколько товаров вы хотите заказать?</label>
                 <!-- Подсказка отделяет число в заявке от остатка на складе. -->
                 <p class="field-hint">Укажите количество для этой заявки, а не наличие на складе.</p>
@@ -342,7 +346,7 @@
     <!-- Подключаем JavaScript в самом конце страницы -->
     <!-- JavaScript лежит в отдельной папке static/js. -->
     <!-- Версия не даст браузеру оставить старый код, который ещё не умеет подставлять цену. -->
-    <script src="static/js/script.js?v=transfer-advisor-1"></script>
+    <script src="static/js/script.js?v=comment-modal-20260911-1"></script>
     <!-- Помощник открывается отдельно и не мешает оформлению заказа. -->
     <link rel="stylesheet" href="static/css/advisor.css?v=1">
     <button id="advisor-toggle" aria-expanded="false" aria-controls="advisor-panel" type="button">✦ Помочь выбрать</button>

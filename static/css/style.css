@@ -612,6 +612,29 @@ h3,
     padding: 13px;
 }
 
+/* Многострочное пожелание выглядит как обычное поле и не ломает сетку формы. */
+#order-form textarea {
+    background: #ffffff;
+    border: 1px solid #aaa69a;
+    border-radius: 8px;
+    color: #29241d;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.45;
+    margin-bottom: 12px;
+    min-height: 82px;
+    padding: 13px;
+    resize: vertical;
+    width: 100%;
+}
+
+#order-form textarea:focus,
+#order-form input:not([type="radio"]):focus {
+    border-color: #b8822f;
+    box-shadow: 0 0 0 3px rgba(184, 130, 47, 0.15);
+    outline: none;
+}
+
 /* Варианты оплаты — это одна понятная группа, а не обычные поля ввода. */
 .payment-methods {
     border: 0;
@@ -686,8 +709,11 @@ h3,
 
 /* Кнопка × */
 .close-button {
-    background: transparent;
-    border: none;
+    /* Контрастный круг остаётся видимым поверх изображения на мобильном. */
+    align-items: center;
+    background: #fffaf2;
+    border: 1px solid rgba(41, 36, 29, 0.24);
+    box-shadow: 0 5px 14px rgba(41, 36, 29, 0.2);
     color: #29241d;
     cursor: pointer;
     border-radius: 50%;
@@ -700,7 +726,7 @@ h3,
     transition: background 0.2s ease, transform 0.2s ease;
     top: 10px;
     width: 44px;
-    z-index: 1;
+    z-index: 20;
 }
 
 .close-button:hover {
@@ -936,6 +962,10 @@ h3,
         width: 100%;
     }
 
+    #order-form textarea {
+        font-size: 16px;
+    }
+
     #order-form input[type="number"] {
         max-width: 160px;
     }
@@ -944,6 +974,13 @@ h3,
         border-radius: 12px;
         height: 190px;
         margin-bottom: 18px;
+    }
+
+    /* У детали товара крестик не прячется в углу под адресной строкой или фото. */
+    #product-modal .close-button {
+        position: absolute;
+        right: 14px;
+        top: 14px;
     }
 
     /* Длинный адрес почты не выйдет за край при увеличенном размере текста. */
